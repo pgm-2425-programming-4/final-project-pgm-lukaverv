@@ -7,7 +7,7 @@ function Backlog() {
     const [pagination, setPagination] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
 
-    const limit = 5;
+    const limit = 2;
     const start = (currentPage - 1) * limit;
 
     useEffect(() => {
@@ -31,7 +31,7 @@ function Backlog() {
     }
 
     return (
-        <div>
+        <div className="backlog">
             <h2>Backlog Taken</h2>
             <ul>
                 {tasks.map((task) => (
