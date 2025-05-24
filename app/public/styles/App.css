@@ -6,3 +6,28 @@
     --accent-100: rgb(29, 205, 159);
     --accent-200: rgb(78, 113, 255);
 }
+
+body {
+    background-color: var(--bg-200);
+    font-size: 1.2rem;
+    display: flex;
+    font-family: "Lato";
+}
+
+.root {
+        display: flex;
+}
+
+h2 {
+    font-size: 2rem;
+    color: var(--txt-200);
+}
+
+h3 {
+    width: fit-content;
+    border-bottom: 2px solid;
+}
+
+main {
+    padding: 4rem;
+}
