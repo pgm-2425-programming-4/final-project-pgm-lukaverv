@@ -1,6 +1,9 @@
 @import url(./base/reset.css);
 
 
+
+@import url(./components/button.css);
+
 :root {
     --bg-100: rgb(255, 253, 240);
     --bg-200: rgb(239, 243, 234);
