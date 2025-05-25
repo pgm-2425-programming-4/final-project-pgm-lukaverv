@@ -1,6 +1,8 @@
 @import url(./base/reset.css);
 
-
+@import url(./layout/header.css);
+@import url(./layout/bar.css);
+@import url(./layout/status.css);
 
 @import url(./components/button.css);
 
@@ -21,7 +23,7 @@ body {
 }
 
 .root {
-    display: flex;
+        display: flex;
 }
 
 h2 {
@@ -37,3 +39,4 @@ h3 {
 main {
     padding: 4rem;
 }
+
