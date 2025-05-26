@@ -5,7 +5,7 @@ function ProjectList() {
     const [projects, setProjects] = useState([]);
 
     useEffect(() => {
-        fetch(`${API_URL}/projects`, {
+        fetch(`http://localhost:1337/api/projects`, {
             headers: {
                 Authorization: `Bearer ${API_TOKEN}`,
             },

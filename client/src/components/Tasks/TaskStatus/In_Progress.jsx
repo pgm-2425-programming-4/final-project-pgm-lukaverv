@@ -5,7 +5,7 @@ function In_Progress() {
     const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
-        fetch(`${API_URL}/tasks?filters[task_status][title][$eq]=in_progress&populate=*`, {
+        fetch(`http://localhost:1337/api/tasks?filters[task_status][title][$eq]=in_progress&populate=*`, {
             headers: {
                 Authorization: `Bearer ${API_TOKEN}`,
             },
