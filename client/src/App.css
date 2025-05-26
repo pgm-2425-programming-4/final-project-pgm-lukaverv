@@ -1,0 +1,17 @@
+@import url("./styles/base/reset.css");
+
+@import url("./styles/layout/header.css");
+@import url("./styles/layout/bar.css");
+@import url("./styles/layout/status.css");
+
+@import url("./styles/components/button.css");
+@import url("./styles/components/input.css");
+
+:root {
+    --bg-100: rgb(255, 253, 240);
+    --bg-200: rgb(239, 243, 234);
+    --txt-100: rgb(0, 0, 0);
+    --txt-200: rgb(34, 34, 34);
+    --accent-100: rgb(29, 205, 159);
+    --accent-200: rgb(78, 113, 255);
+}
