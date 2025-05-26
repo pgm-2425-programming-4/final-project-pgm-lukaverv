@@ -1,0 +1,11 @@
+input, select {
+    height: 2rem;
+    width: fit-content;
+    border: none;
+    border-radius: .25rem;
+    background-color: var(--bg-200);
+    color: var(--txt-200);
+    &::placeholder {
+        color: var(--txt-200);
+    }
+}

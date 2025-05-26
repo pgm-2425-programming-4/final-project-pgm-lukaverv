@@ -1,0 +1,13 @@
+.main__project-options {
+    background-color: var(--bg-100);
+    border-radius: .5rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    div {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+}
