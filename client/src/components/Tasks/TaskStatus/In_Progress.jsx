@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { API_TOKEN } from "../../../App";
+import { API_TOKEN, API_URL } from "../../../constants/constant";
 
 function In_Progress() {
     const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:1337/api/tasks?filters[task_status][title][$eq]=in_progress&populate=*", {
+        fetch(`${API_URL}/tasks?filters[task_status][title][$eq]=in_progress&populate=*`, {
             headers: {
                 Authorization: `Bearer ${API_TOKEN}`,
             },
