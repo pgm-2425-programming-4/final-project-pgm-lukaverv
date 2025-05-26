@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { API_TOKEN } from "../../App";
+import { API_TOKEN, API_URL } from "../../constants/constant.js";
 import Pagination from "./Pagination";
 
 function Backlog() {
@@ -12,7 +12,7 @@ function Backlog() {
 
     useEffect(() => {
         fetch(
-            `http://localhost:1337/api/tasks?filters[task_status][title][$eq]=Backlog&pagination[start]=${start}&pagination[limit]=${limit}&populate=*`,
+            `${API_URL}/tasks?filters[task_status][title][$eq]=Backlog&pagination[start]=${start}&pagination[limit]=${limit}&populate=*`,
             {
                 headers: {
                     Authorization: `Bearer ${API_TOKEN}`,

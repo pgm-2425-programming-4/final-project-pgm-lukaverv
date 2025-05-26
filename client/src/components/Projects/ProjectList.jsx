@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { API_TOKEN } from "../../App";
+import { API_TOKEN, API_URL } from "../../constants/constant.js";
 
 function ProjectList() {
     const [projects, setProjects] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:1337/api/projects", {
+        fetch(`${API_URL}/projects`, {
             headers: {
                 Authorization: `Bearer ${API_TOKEN}`,
             },
