@@ -23,20 +23,16 @@
       "target": "api::project.project",
       "inversedBy": "tasks"
     },
-    "task_status": {
-      "type": "enumeration",
-      "enum": [
-        "Backlog",
-        "To do",
-        "In progress",
-        "Ready for review",
-        "Done"
-      ]
-    },
     "labels": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::label.label",
+      "inversedBy": "tasks"
+    },
+    "task_status": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::status.status",
       "inversedBy": "tasks"
     }
   }
