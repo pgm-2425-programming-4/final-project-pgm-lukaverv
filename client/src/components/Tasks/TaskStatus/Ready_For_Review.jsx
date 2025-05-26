@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { API_TOKEN, API_URL } from "../../../constants/constant";
+import { API_TOKEN, API_URL } from "../../../constants/constant.js";
 
 function Ready_For_Review() {
     const [tasks, setTasks] = useState([]);
