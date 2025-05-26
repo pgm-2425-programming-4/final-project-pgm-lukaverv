@@ -5,7 +5,7 @@ function Done() {
     const [tasks, setTasks] = useState([]);
         
     useEffect(() => {
-        fetch(`http://localhost:1337/api/tasks?filters[task_status][title][$eq]=done&populate=*`, {
+        fetch(`${API_URL}/tasks?filters[task_status][title][$eq]=done&populate=*`, {
             headers: {
                 Authorization: `Bearer ${API_TOKEN}`,
             },

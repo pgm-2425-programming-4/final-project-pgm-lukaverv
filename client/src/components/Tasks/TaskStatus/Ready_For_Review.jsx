@@ -5,7 +5,7 @@ function Ready_For_Review() {
     const [tasks, setTasks] = useState([]);
     
     useEffect(() => {
-        fetch(`http://localhost:1337/api/tasks?filters[task_status][title][$eq]=ready_for_review&populate=*`, {
+        fetch(`${API_URL}/tasks?filters[task_status][title][$eq]=ready_for_review&populate=*`, {
             headers: {
                 Authorization: `Bearer ${API_TOKEN}`,
             },

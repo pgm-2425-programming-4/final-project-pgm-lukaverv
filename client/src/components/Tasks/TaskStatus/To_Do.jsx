@@ -5,7 +5,7 @@ function To_Do() {
     const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:1337/api/tasks?filters[task_status][title][$eq]=to_do&populate=*`, {
+        fetch(`${API_URL}/tasks?filters[task_status][title][$eq]=to_do&populate=*`, {
             headers: {
                 Authorization: `Bearer ${API_TOKEN}`,
             },
