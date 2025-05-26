@@ -1,0 +1,7 @@
+export const API_URL = import.meta.env.PROD
+? "https://jammin-api-vpv8.onrender.com/api"
+: "http://localhost:1337/api";
+
+export const API_TOKEN = import.meta.env.PROD
+? "c0b2f6f7f3cf1013f899311e049cef09bb6eaa47e3be3756c3b24676a28d2a24ac5c40796f373571703831afb687ffd0bc63fcb1f754fa24bd49204b44a213dc7bbeb85e57bfd41bcd8b307b69d9c0b740872f5c8b42280608244913c4dcf3197e3d542f3b669393af3d46ca78f3098301a29287337dc29f5c4f1ceee0e334ea"
+: "b5abb911ff97819bc8afb63b49ef6c1c8a63e9d58c1e9c79cc9ff6de5badf73365d083bf7b1b340cd5c6d7e58019fb98d945e0fb697c0c7ab95ce40875152645deabecacaf16a763c4db4595d02c0f5c4e2984fbe281a6b4d36443223a7f6b2a7050ed76f4b2f463c6e7cab7df9f0f9bb12afed6da67947230d6e63d4a1bb5fa";
