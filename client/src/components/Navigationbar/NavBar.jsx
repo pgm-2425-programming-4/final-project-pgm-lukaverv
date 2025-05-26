@@ -1,3 +1,6 @@
+import Backlog from "./Backlog/Backlog"
+import AddTask from "./Tasks/AddTask"
+
 function NavBar() {
     return (
     <>
@@ -14,6 +17,8 @@ function NavBar() {
             </div>
             <div>
                 <p className="main__active-project">Active Project: PGM3</p>
+                <AddTask />
+                <Backlog />
             </div>
         </section>
     </>
