@@ -1,22 +1,23 @@
 import { useEffect, useState } from "react";
-import { API_TOKEN, API_URL } from "../../../constants/constant.js";
+import { API_TOKEN, API_URL } from "../../constants/constant.js";
 
-function Ready_For_Review() {
+function TaskStatus({ statusTitle }) {
     const [tasks, setTasks] = useState([]);
-    
+
     useEffect(() => {
-        fetch(`${API_URL}/tasks?filters[task_status][title][$eq]=ready_for_review&populate=*`, {
-            headers: {
-                Authorization: `Bearer ${API_TOKEN}`,
-            },
-        })
-        .then((res) => res.json())
-        .then((json) => {
-            setTasks(json.data);
-        });
-    }, [])
+        fetch(
+            `${API_URL}/tasks?filters[task_status][title][$eq]=${statusTitle}&populate=*`,
+            {
+                headers: {
+                    Authorization: `Bearer ${API_TOKEN}`,
+                },
+            }
+        )
+            .then((res) => res.json())
+            .then((json) => setTasks(json.data));
+    }, [statusTitle]);
+
     return (
-        <>
             <article className="task-status task-status--ready-for-review">
                 <h3 className="task-status__title">Ready for review</h3>
                 <div className="task-status__tasks">
@@ -34,8 +35,7 @@ function Ready_For_Review() {
                     ))}
                 </div>
         </article>
-        </>
     );
 }
 
-export default Ready_For_Review;
+export default TaskStatus;

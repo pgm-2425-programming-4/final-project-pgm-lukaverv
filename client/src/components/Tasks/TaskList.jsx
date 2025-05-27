@@ -1,16 +1,13 @@
-import Done from "./TaskStatus/Done";
-import In_Progress from "./TaskStatus/In_Progress";
-import Ready_For_Review from "./TaskStatus/Ready_For_Review";
-import To_Do from "./TaskStatus/To_Do";
+import TaskStatus from "./TaskStatus";
 
 function TaskList() {
     return (
         <>
             <section className="main__task-status">
-                <To_Do />
-                <In_Progress />
-                <Ready_For_Review />
-                <Done />
+                <TaskStatus statusTitle="to_do" />
+                <TaskStatus statusTitle="in_progress" />
+                <TaskStatus statusTitle="ready_for_review" />
+                <TaskStatus statusTitle="done" />
             </section>
         </>
     );
