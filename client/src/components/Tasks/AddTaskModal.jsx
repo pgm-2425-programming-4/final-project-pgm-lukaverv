@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
-import { API_TOKEN, API_URL } from "../../constants/constant.js";
+import { useState } from "react";
+import { getLabels, getStatuses, getProjects, createTask } from "../../services/api.js";
+import { useQuery, useMutation } from "@tanstack/react-query";
 
 function AddTaskModal({ onClose, onTaskAdded }) {
     const [title, setTitle] = useState("");
@@ -7,60 +8,40 @@ function AddTaskModal({ onClose, onTaskAdded }) {
     const [project, setProject] = useState("");
     const [taskStatus, setTaskStatus] = useState("");
     const [labels, setLabels] = useState([]);
-    const [allProjects, setAllProjects] = useState([]);
-    const [allStatuses, setAllStatuses] = useState([]);
-    const [allLabels, setAllLabels] = useState([]);
 
-    useEffect(() => {
-        fetch(`${API_URL}/projects`, {
-            headers: {
-                Authorization: `Bearer ${API_TOKEN}`,
-            },
-        })
-            .then((res) => res.json())
-            .then((json) => setAllProjects(json.data));
-
-        fetch(`${API_URL}/statuses`, {
-            headers: {
-                Authorization: `Bearer ${API_TOKEN}`,
-            },
-        })
-            .then((res) => res.json())
-            .then((json) => setAllStatuses(json.data));
-
-        fetch(`${API_URL}/labels`, {
-            headers: {
-                Authorization: `Bearer ${API_TOKEN}`,
-            },
-        })
-            .then((res) => res.json())
-            .then((json) => setAllLabels(json.data));
-    }, []);
-
-    const handleSubmit = (e => {
-        e.preventDefault();
-        fetch(`${API_URL}/tasks`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${API_TOKEN}`,
-            },
-            body: JSON.stringify({
-                data: {
-                    title,
-                    description,
-                    project,
-                    task_status: taskStatus,
-                    labels,
-                }
-            })
-        })
-        .then((res) => res.json())
-        .then((json) => {
-            onTaskAdded && onTaskAdded(json.data);
-            onClose();
-        })
+    const { data: allProjects = [] } = useQuery({
+        queryKey: ["projects"],
+        queryFn: getProjects
     })
+
+    const { data: allStatuses = [] } = useQuery({
+        queryKey: ["statuses"],
+        queryFn: getStatuses
+    })
+
+    const { data: allLabels = [] } = useQuery({
+        queryKey: ["labels"],
+        queryFn: getLabels
+    })
+
+    const mutation = useMutation({
+        mutationFn: createTask,
+        onSuccess: (newTask) => {
+            onTaskAdded?.(newTask);
+            onClose();
+        }
+    })
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        mutation.mutate({
+            title,
+            description,
+            project,
+            task_status: taskStatus,
+            labels
+        })
+    }
 
     return (
         <div className="modal-overlay" onClick={onClose}>
@@ -133,7 +114,13 @@ function AddTaskModal({ onClose, onTaskAdded }) {
                             </select>
                         </label>
                     </div>
-                    <button type="submit" className="modal__button main__button--add-task">Submit</button>
+                    <button
+                        type="submit" 
+                        className="modal__button main__button--add-task"
+                        disabled={mutation.isLoading}
+                        >
+                        {mutation.isLoading ? "Adding Task..." : "Add Task"}
+                        </button>
                 </form>
             </section>
         </div>
