@@ -1,30 +1,28 @@
-import { useEffect, useState } from "react";
-import { API_TOKEN, API_URL } from "../../constants/constant.js";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getTaskByStatus } from "../../services/api.js";
 import TaskDetailModal from "./TaskDetailModal.jsx";
 
 function TaskStatus({ statusTitle }) {
-    const [tasks, setTasks] = useState([]);
     const [selectedTask, setSelectedTask] = useState(null);
+    const { data: tasks, isLoading, error } = useQuery({
+        queryKey: ["tasks", statusTitle],
+        queryFn: () => getTaskByStatus(statusTitle),
+    })
 
-    useEffect(() => {
-        fetch(
-            `${API_URL}/tasks?filters[task_status][title][$eq]=${statusTitle}&populate=*`,
-            {
-                headers: {
-                    Authorization: `Bearer ${API_TOKEN}`,
-                },
-            }
-        )
-            .then((res) => res.json())
-            .then((json) => setTasks(json.data));
-    }, [statusTitle]);
+    if (isLoading) return <p>Loading tasks...</p>;
+    if (error) return <p>Er is een fout opgetreden bij het ophalen van taken: {error.message}</p>;
 
     return (
-            <article className="task-status task-status--ready-for-review">
+            <article className="task-status">
                 <h3 className="task-status__title">{statusTitle}</h3>
                 <div className="task-status__tasks">
                     {tasks.map((task) => (
-                        <div className="task" key={task.id} onClick={() => setSelectedTask(task)}>
+                        <div
+                            className="task" 
+                            key={task.id} 
+                            onClick={() => setSelectedTask(task)}
+                        >
                             <p className="task__title">{task.title}</p>
                             <div className="task__labels">
                                 {task.labels.map((label) => (

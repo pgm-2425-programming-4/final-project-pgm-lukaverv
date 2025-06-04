@@ -1,4 +1,5 @@
-input, select {
+input, select, textarea {
+    cursor: pointer;
     height: 2rem;
     width: fit-content;
     border: none;

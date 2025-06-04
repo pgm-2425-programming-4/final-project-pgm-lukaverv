@@ -1,12 +1,23 @@
+import { useState } from 'react';
+import AddTaskModal from '../../Tasks/AddTaskModal';
+
 function AddTask() {
+    const [showModal, setShowModal] = useState(false);
+
     const handleClick = () => {
-        // Logic to handle adding a task
-        console.log("Add Task button clicked");
+        setShowModal(true);
     }
+
+    const handleClose = () => {
+        setShowModal(false);
+    }
+    
     return (
+        <>
         <button onClick={handleClick} className="main__button main__button--add-task">Add Task</button>
+        {showModal && <AddTaskModal onClose={handleClose} /> }
+        </>
     );
 }
 
 export default AddTask;
-
