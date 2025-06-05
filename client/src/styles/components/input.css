@@ -1,6 +1,5 @@
 input, select, textarea {
     cursor: pointer;
-    height: 2rem;
     width: fit-content;
     border: none;
     border-radius: .25rem;
