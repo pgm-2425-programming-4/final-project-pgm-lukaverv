@@ -1,34 +1,35 @@
-import { useEffect, useState } from "react";
-import { API_TOKEN, API_URL } from "../../constants/constant.js";
+import { useQuery } from "@tanstack/react-query";
+import { getProjects } from "../../services/api.js";
 
 function ProjectList() {
-    const [projects, setProjects] = useState([]);
+  const {
+    data: projects,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["projects"],
+    queryFn: getProjects,
+  });
 
-    useEffect(() => {
-        fetch(`${API_URL}/projects`, {
-            headers: {
-                Authorization: `Bearer ${API_TOKEN}`,
-            },
-        })
-        .then((res) => res.json())
-        .then((json) => {
-            setProjects(json.data);
-        });
-    }, []);
-    return (
+  if (isLoading) return <p>Loading Projects...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  return (
     <>
-        <header className="header">
+      <header className="header">
         <nav className="header__navigation">
-            <h2 className="header__title">Projects</h2>
-            <section className="header__projects">
-                {projects.map((project) => (
-                    <p key={project.id} className="header__project">{project.title}</p>
-                ))}
-            </section>
+          <h2 className="header__title">Projects</h2>
+          <section className="header__projects">
+            {projects.map((project) => (
+              <p key={project.id} className="header__project">
+                {project.title}
+              </p>
+            ))}
+          </section>
         </nav>
-        </header>
+      </header>
     </>
-    )
+  );
 }
 
-export default ProjectList
+export default ProjectList;
