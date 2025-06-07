@@ -1,19 +1,18 @@
-import NavBar from "./components/Navigationbar/NavBar";
-import ProjectList from "./components/Projects/ProjectList";
+import NavBar from "./components/NavBar/NavBar";
 import TaskList from "./components/Tasks/TaskList";
-import "./App.css"
-
+import TaskToolBar from "./components/Navigationbar/TaskToolBar";
+import "./App.css";
 
 function App() {
-    return (
-        <>
-            <ProjectList />
-            <main className="main">
-                <NavBar/>
-                <TaskList />
-            </main>
-        </>
-    );
+  return (
+    <>
+      <NavBar />
+      <main className="main">
+        <TaskToolBar />
+        <TaskList />
+      </main>
+    </>
+  );
 }
 
 export default App;
