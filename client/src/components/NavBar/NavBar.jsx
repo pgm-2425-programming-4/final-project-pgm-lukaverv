@@ -1,4 +1,4 @@
-import Home from "./Home/Home.jsx";
+import { Link } from "@tanstack/react-router";
 import ProjectList from "./Projects/ProjectList.jsx";
 
 function NavBar() {
@@ -6,11 +6,11 @@ function NavBar() {
     <>
       <header className="header">
         <nav className="header__navigation">
-          <p className="header__item">Home</p>
+          <Link to={"/"} className="header__item">Home</Link>
           <h2 className="header__title">Projects</h2>
           <ProjectList />
           <h2 className="header__title">Info</h2>
-          <p className="header__item">About</p>
+          <Link to={"/about"} className="header__item">About</Link>
         </nav>
       </header>
     </>

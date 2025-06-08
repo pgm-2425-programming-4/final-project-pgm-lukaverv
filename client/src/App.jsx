@@ -1,6 +1,6 @@
 import NavBar from "./components/NavBar/NavBar";
 import TaskList from "./components/Tasks/TaskList";
-import TaskToolBar from "./components/Navigationbar/TaskToolBar";
+import TaskToolBar from "./components/TaskToolBar/TaskToolBar";
 import "./App.css";
 
 function App() {
