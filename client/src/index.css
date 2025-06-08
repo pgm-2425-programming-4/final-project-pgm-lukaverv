@@ -1,24 +1,39 @@
 body {
-    background-color: var(--bg-200);
-    font-size: 1.2rem;
-    display: flex;
-    font-family: "Lato";
+  background-color: var(--bg-200);
+  font-size: 1.2rem;
+  display: flex;
+  font-family: "Lato";
 }
 
 .root {
-    display: flex;
+  display: flex;
 }
 
 h2 {
-    font-size: 1.6rem;
-    color: var(--txt-200);
+  font-size: 1.6rem;
+  color: var(--txt-200);
 }
 
 h3 {
-    width: fit-content;
-    border-bottom: 2px solid;
+  width: fit-content;
+  border-bottom: 2px solid;
 }
 
 main {
-    padding: 4rem;
+  padding: 4rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+svg {
+  width: 1.6rem;
+  height: 1.6rem;
+  fill: var(--txt-200);
 }

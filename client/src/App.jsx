@@ -1,6 +1,5 @@
 import NavBar from "./components/NavBar/NavBar";
-import TaskList from "./components/Tasks/TaskList";
-import TaskToolBar from "./components/TaskToolBar/TaskToolBar";
+import { Outlet } from "@tanstack/react-router";
 import "./App.css";
 
 function App() {
@@ -8,8 +7,7 @@ function App() {
     <>
       <NavBar />
       <main className="main">
-        <TaskToolBar />
-        <TaskList />
+        <Outlet />
       </main>
     </>
   );
