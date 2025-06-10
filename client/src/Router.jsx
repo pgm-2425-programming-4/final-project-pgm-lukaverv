@@ -34,4 +34,4 @@ rootRoute.addChildren([homeRoute, aboutRoute, projectRoute]);
 
 const router = createRouter({ routeTree: rootRoute });
 
-export default router;
+export { router }
