@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { getProjects } from "../../../services/api.js";
 
@@ -17,9 +18,13 @@ function ProjectList() {
   return (
     <section className="header__projects">
       {projects.map((project) => (
-        <p key={project.id} className="header__project header__item">
+        <Link
+          key={project.id}
+          to={`/project/${project.documentId}`}
+          className="header__project header__item"
+        >
           {project.title}
-        </p>
+        </Link>
       ))}
     </section>
   );

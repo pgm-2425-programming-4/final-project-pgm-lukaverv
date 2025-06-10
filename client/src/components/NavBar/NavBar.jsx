@@ -6,11 +6,15 @@ function NavBar() {
     <>
       <header className="header">
         <nav className="header__navigation">
-          <Link to={"/"} className="header__item">Home</Link>
+          <Link to={"/"} className="header__item">
+            Home
+          </Link>
           <h2 className="header__title">Projects</h2>
           <ProjectList />
           <h2 className="header__title">Info</h2>
-          <Link to={"/about"} className="header__item">About</Link>
+          <Link to={"/about"} className="header__item">
+            About
+          </Link>
         </nav>
       </header>
     </>

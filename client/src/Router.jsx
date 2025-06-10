@@ -6,13 +6,12 @@ import {
 import App from "./App";
 import Home from "./components/NavBar/Home/Home";
 import About from "./components/NavBar/About/ABout";
+import ProjectPage from "./components/NavBar/Projects/ProjectPage";
 
-// This is the root route
 const rootRoute = createRootRoute({
   component: App,
 });
 
-// Children routes
 const homeRoute = createRoute({
   component: Home,
   getParentRoute: () => rootRoute,
@@ -25,7 +24,13 @@ const aboutRoute = createRoute({
   path: "/about",
 });
 
-rootRoute.addChildren([homeRoute, aboutRoute]);
+const projectRoute = createRoute({
+  component: ProjectPage,
+  getParentRoute: () => rootRoute,
+  path: "/project/$projectId"
+})
+
+rootRoute.addChildren([homeRoute, aboutRoute, projectRoute]);
 
 const router = createRouter({ routeTree: rootRoute });
 
