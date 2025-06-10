@@ -1,4 +1,4 @@
-import NavBar from "./components/Navigationbar/NavBar";
+import NavBar from "./components/NavBar/NavBar";
 import ProjectList from "./components/Projects/ProjectList";
 import TaskList from "./components/Tasks/TaskList";
 import "./App.css";
