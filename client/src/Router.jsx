@@ -23,6 +23,8 @@ const aboutRoute = createRoute({
   path: "/about",
 });
 
+
+
 rootRoute.addChildren([homeRoute, aboutRoute]);
 
 const router = createRouter({ routeTree: rootRoute });
