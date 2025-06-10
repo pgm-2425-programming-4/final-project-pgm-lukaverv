@@ -56,47 +56,46 @@ function AddTaskModal({ onClose, onTaskAdded }) {
           X
         </button>
         <form className="modal__form" onSubmit={handleSubmit}>
-          <div>
-            <label className="modal__label">
+          <div className="modal__form-group">
+            <label className="modal__label" htmlFor="task-title">
               Title:
-              <input
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                required
-              />
             </label>
+            <input
+              id="task-title"
+              className="modal__input"
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
           </div>
-          <div>
-            <label className="modal__label">
-              Description:
-              <textarea
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-            </label>
-          </div>
-          <div>
-            <label className="modal__label">
+          <div className="modal__form-group">
+            <label className="modal__label" htmlFor="task-project">
               Project:
-              <select
-                value={project}
-                onChange={(e) => setProject(e.target.value)}
-                required
-              >
-                <option value="">Select a project</option>
-                {allProjects.map((project) => (
-                  <option key={project.id} value={project.id}>
-                    {project.title}
-                  </option>
-                ))}
-              </select>
             </label>
+            <select
+              id="task-project"
+              className="modal__input"
+              value={project}
+              onChange={(e) => setProject(e.target.value)}
+              required
+            >
+              <option value="">Select a project</option>
+              {allProjects.map((project) => (
+                <option key={project.id} value={project.id}>
+                  {project.title}
+                </option>
+              ))}
+            </select>
           </div>
-          <div>
-            <label className="modal__label">
-              Status:
+          <div className="modal__form-group">
+            <div>
+              <label className="modal__label" htmlFor="task-status">
+                Status:
+              </label>
               <select
+                id="task-status"
+                className="modal__input"
                 value={taskStatus}
                 onChange={(e) => setTaskStatus(e.target.value)}
                 required
@@ -108,20 +107,22 @@ function AddTaskModal({ onClose, onTaskAdded }) {
                   </option>
                 ))}
               </select>
-            </label>
-          </div>
-          <div>
-            <label className="modal__label">
-              Labels:
+            </div>
+            <div>
+              <label className="modal__label" htmlFor="task-labels">
+                Labels:
+              </label>
               <select
+                id="task-labels"
+                className="modal__input"
                 multiple
                 value={labels}
                 onChange={(e) =>
                   setLabels(
                     Array.from(
                       e.target.selectedOptions,
-                      (option) => option.value,
-                    ),
+                      (option) => option.value
+                    )
                   )
                 }
               >
@@ -131,7 +132,18 @@ function AddTaskModal({ onClose, onTaskAdded }) {
                   </option>
                 ))}
               </select>
+            </div>
+          </div>
+          <div className="modal__form-group modal__form-group--description">
+            <label className="modal__label" htmlFor="task-description">
+              Description:
             </label>
+            <textarea
+              id="task-description"
+              className="modal__input"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
           </div>
           <button
             type="submit"

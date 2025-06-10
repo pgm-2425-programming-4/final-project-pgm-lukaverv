@@ -1,13 +1,12 @@
 .main__project-options {
-  background-color: var(--bg-100);
-  border-radius: 0.5rem;
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  div {
+    background-color: var(--bg-100);
+    border-radius: .5rem;
+    padding: 1rem;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 1rem;
-  }
+    div {
+        display: flex;
+        gap: 1rem;
+    }
 }

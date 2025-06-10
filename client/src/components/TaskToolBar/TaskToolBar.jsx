@@ -1,7 +1,7 @@
 import Backlog from "./Backlog/Backlog";
 import AddTask from "./Tasks/AddTask";
 
-function NavBar() {
+function TaskToolBar() {
   return (
     <>
       <section className="main__project-options">
@@ -29,4 +29,4 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+export default TaskToolBar;

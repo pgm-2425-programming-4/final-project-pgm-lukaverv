@@ -17,7 +17,7 @@ function Pagination({ totalPages, currentPage, onPageChanged }) {
         >
           {pageNumber}
         </button>
-      </li>,
+      </li>
     );
   }
 

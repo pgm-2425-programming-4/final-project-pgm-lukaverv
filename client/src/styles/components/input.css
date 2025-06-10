@@ -1,14 +1,11 @@
-input,
-select,
-textarea {
-  cursor: pointer;
-  height: 2rem;
-  width: fit-content;
-  border: none;
-  border-radius: 0.25rem;
-  background-color: var(--bg-200);
-  color: var(--txt-200);
-  &::placeholder {
+input, select, textarea {
+    cursor: pointer;
+    width: fit-content;
+    border: none;
+    border-radius: .25rem;
+    background-color: var(--bg-200);
     color: var(--txt-200);
-  }
+    &::placeholder {
+        color: var(--txt-200);
+    }
 }

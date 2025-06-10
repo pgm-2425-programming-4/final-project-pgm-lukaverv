@@ -1,15 +1,13 @@
-import NavBar from "./components/Navigationbar/NavBar";
-import ProjectList from "./components/Projects/ProjectList";
-import TaskList from "./components/Tasks/TaskList";
+import NavBar from "./components/NavBar/NavBar";
+import { Outlet } from "@tanstack/react-router";
 import "./App.css";
 
 function App() {
   return (
     <>
-      <ProjectList />
+      <NavBar />
       <main className="main">
-        <NavBar />
-        <TaskList />
+        <Outlet />
       </main>
     </>
   );

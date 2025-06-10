@@ -16,10 +16,24 @@ export const getProjects = () => {
   return fetchData("projects");
 };
 
+// Een specifiek project ophalen op basis van de projectId
+export const getProjectByDocumentId = (documentId) => {
+  return fetchData(
+    `projects?filters[documentId][$eq]=${documentId}&populate=*`
+  );
+};
+
 // Alle taken ophalen op basis van de task_status
 export const getTaskByStatus = (taskStatus) => {
   return fetchData(
     `tasks?filters[task_status][title][$eq]=${taskStatus}&populate=*`
+  );
+};
+
+// Alle taken ophalen op basis van het documentId van het project
+export const getTasksByProjectDocumentId = (documentId) => {
+  return fetchData(
+    `tasks?filters[project][documentId][$eq]=${documentId}&populate=*`
   );
 };
 

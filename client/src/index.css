@@ -10,7 +10,7 @@ body {
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 1.6rem;
   color: var(--txt-200);
 }
 
@@ -20,5 +20,20 @@ h3 {
 }
 
 main {
-  padding: 4rem;
+  padding: 2rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+svg {
+  width: 1.6rem;
+  height: 1.6rem;
+  fill: var(--txt-200);
 }

@@ -1,21 +1,21 @@
 button {
-  cursor: pointer;
-  border: none;
-  background: none;
-  padding: 0.5rem 1rem;
-  border-radius: 0.375rem;
-  font-weight: 600;
-  &:hover {
-    scale: 1.05;
-    transition: all 0.3s ease-in-out;
-  }
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0.5rem 1rem;
+    border-radius: .375rem;
+    font-weight: 600;
+    &:hover {
+        scale: 1.05;
+        transition: all 0.3s ease-in-out;
+    }
 }
 
 .main__button--add-task {
-  background-color: var(--accent-100);
+    background-color: var(--accent-100);
 }
 
 .main__button--view-backlog {
-  background-color: var(--accent-200);
-  color: var(--bg-200);
+    background-color: var(--accent-200);
+    color: var(--bg-200);
 }
