@@ -5,7 +5,7 @@ import {
 } from "@tanstack/react-router";
 import App from "./App";
 import Home from "./components/NavBar/Home/Home";
-import About from "./components/NavBar/About/ABout";
+import About from "./components/NavBar/About/About";
 import ProjectPage from "./components/NavBar/Projects/ProjectPage";
 
 const rootRoute = createRootRoute({
@@ -27,8 +27,8 @@ const aboutRoute = createRoute({
 const projectRoute = createRoute({
   component: ProjectPage,
   getParentRoute: () => rootRoute,
-  path: "/project/$projectId"
-})
+  path: "/project/$projectId",
+});
 
 rootRoute.addChildren([homeRoute, aboutRoute, projectRoute]);
 
