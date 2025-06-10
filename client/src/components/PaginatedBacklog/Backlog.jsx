@@ -17,7 +17,7 @@ function Backlog() {
         headers: {
           Authorization: `Bearer ${API_TOKEN}`,
         },
-      },
+      }
     )
       .then((res) => res.json())
       .then((json) => {

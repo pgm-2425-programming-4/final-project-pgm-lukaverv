@@ -5,6 +5,7 @@ import {
   getTasksByProjectDocumentId,
 } from "../../../services/api";
 import TaskStatus from "../../Tasks/TaskStatus";
+import TaskToolBar from "../../TaskToolBar/TaskToolBar";
 
 function ProjectPage() {
   const { projectId } = useParams({ strict: false });
@@ -27,6 +28,7 @@ function ProjectPage() {
   return (
     <section className="project">
       <h1 className="project__title">{project.title}</h1>
+      <TaskToolBar />
       <div className="main__task-status">
         {statuses.map((status) => (
           <TaskStatus
