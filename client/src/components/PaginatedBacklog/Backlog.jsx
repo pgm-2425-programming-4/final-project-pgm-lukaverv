@@ -1,50 +1,72 @@
-import { useEffect, useState } from "react";
-import { API_TOKEN, API_URL } from "../../constants/constant.js";
 import Pagination from "./Pagination";
+import { useState } from "react";
+import { useParams, useNavigate } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
+import {
+  getBacklogTasksByProjectDocumentId,
+  getProjectByDocumentId,
+} from "../../services/api.js";
 
 function Backlog() {
-  const [tasks, setTasks] = useState([]);
-  const [pagination, setPagination] = useState(null);
+  const params = useParams({ strict: false });
+  const projectId = params.projectId;
+  const navigate = useNavigate();
+
   const [currentPage, setCurrentPage] = useState(1);
 
-  const limit = 2;
+  const limit = 10;
   const start = (currentPage - 1) * limit;
 
-  useEffect(() => {
-    fetch(
-      `${API_URL}/tasks?filters[task_status][title][$eq]=Backlog&pagination[start]=${start}&pagination[limit]=${limit}&populate=*`,
-      {
-        headers: {
-          Authorization: `Bearer ${API_TOKEN}`,
-        },
-      }
-    )
-      .then((res) => res.json())
-      .then((json) => {
-        setTasks(json.data);
-        setPagination(json.meta.pagination);
-      });
-  }, [start]);
+  const { data: projectData, isLoading: loadingProject } = useQuery({
+    queryKey: ["project", projectId],
+    queryFn: () => getProjectByDocumentId(projectId),
+  });
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["backlogTasks", projectId, start, limit],
+    queryFn: () => getBacklogTasksByProjectDocumentId(projectId, start, limit),
+  });
 
   function handlePageChange(page) {
     setCurrentPage(page);
   }
 
+  if (loadingProject || isLoading)
+    return <p className="backlog__loading">Loading...</p>;
+  if (error) return <p className="backlog__error">Failed to load tasks.</p>;
+
+  const project = projectData.data[0];
+  const tasks = data.data || [];
+  const pagination = data.meta.pagination;
+
   return (
     <div className="backlog">
-      <h2>Backlog Taken</h2>
-      <ul>
-        {tasks.map((task) => (
-          <li key={task.id}>{task.title}</li>
-        ))}
+      <button
+        className="backlog__back button"
+        onClick={() => navigate({ to: `/projects/${projectId}` })}
+      >Go Back</button>
+      <h2 className="backlog__title">Backlog for {project.title}</h2>
+      <ul className="backlog__list">
+        {tasks.length > 0 ? (
+          tasks.map((task) => (
+            <li className="backlog__item" key={task.id}>
+              <span className="backlog__task-title">{task.title}</span>
+            </li>
+          ))
+        ) : (
+          <li className="backlog__item backlog__item--empty">
+            No backlog tasks found.
+          </li>
+        )}
       </ul>
-
       {pagination && (
-        <Pagination
-          totalPages={Math.ceil(pagination.total / limit)}
-          currentPage={currentPage}
-          onPageChanged={handlePageChange}
-        />
+        <div className="backlog__pagination">
+          <Pagination
+            totalPages={Math.ceil(pagination.total / limit)}
+            currentPage={currentPage}
+            onPageChanged={handlePageChange}
+          />
+        </div>
       )}
     </div>
   );

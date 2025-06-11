@@ -17,10 +17,10 @@ function ProjectList() {
 
   return (
     <section className="header__projects">
-      {projects.map((project) => (
+      {projects.data.map((project) => (
         <Link
           key={project.id}
-          to={`/project/${project.documentId}`}
+          to={`/projects/${project.documentId}`}
           className="header__project header__item"
         >
           {project.title}
