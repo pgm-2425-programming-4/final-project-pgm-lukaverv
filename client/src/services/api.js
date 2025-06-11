@@ -37,6 +37,13 @@ export const getTasksByProjectDocumentId = (documentId) => {
   );
 };
 
+// Alle taken ophalen op basis van het documentId van het project met paginering
+export const getBacklogTasksByProjectDocumentId = (documentId, start = 0, limit = 10) => {
+  return fetchData(
+    `tasks?filters[task_status][title][$eq]=Backlog&filters[project][documentId][$eq]=${documentId}&pagination[start]=${start}&pagination[limit]=${limit}&populate=*`
+  )
+}
+
 // Alle statussen ophalen
 export const getStatuses = () => fetchData("statuses");
 
