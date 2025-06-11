@@ -19,30 +19,34 @@ export const getProjects = () => {
 // Een specifiek project ophalen op basis van de projectId
 export const getProjectByDocumentId = (documentId) => {
   return fetchData(
-    `projects?filters[documentId][$eq]=${documentId}&populate=*`
+    `projects?filters[documentId][$eq]=${documentId}&populate=*`,
   );
 };
 
 // Alle taken ophalen op basis van de task_status
 export const getTaskByStatus = (taskStatus) => {
   return fetchData(
-    `tasks?filters[task_status][title][$eq]=${taskStatus}&populate=*`
+    `tasks?filters[task_status][title][$eq]=${taskStatus}&populate=*`,
   );
 };
 
 // Alle taken ophalen op basis van het documentId van het project
 export const getTasksByProjectDocumentId = (documentId) => {
   return fetchData(
-    `tasks?filters[project][documentId][$eq]=${documentId}&populate=*`
+    `tasks?filters[project][documentId][$eq]=${documentId}&populate=*`,
   );
 };
 
 // Alle taken ophalen op basis van het documentId van het project met paginering
-export const getBacklogTasksByProjectDocumentId = (documentId, start = 0, limit = 10) => {
+export const getBacklogTasksByProjectDocumentId = (
+  documentId,
+  start = 0,
+  limit = 10,
+) => {
   return fetchData(
-    `tasks?filters[task_status][title][$eq]=Backlog&filters[project][documentId][$eq]=${documentId}&pagination[start]=${start}&pagination[limit]=${limit}&populate=*`
-  )
-}
+    `tasks?filters[task_status][title][$eq]=Backlog&filters[project][documentId][$eq]=${documentId}&pagination[start]=${start}&pagination[limit]=${limit}&populate=*`,
+  );
+};
 
 // Alle statussen ophalen
 export const getStatuses = () => fetchData("statuses");
@@ -63,5 +67,5 @@ export const createTask = async (taskData) => {
     }),
   });
   const json = await response.json();
-  return json.data;
+  return json;
 };
