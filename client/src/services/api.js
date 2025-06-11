@@ -8,7 +8,7 @@ const fetchData = async (endpoint) => {
     },
   });
   const json = await response.json();
-  return json.data;
+  return json;
 };
 
 // Alle projecten ophalen
@@ -43,7 +43,7 @@ export const getBacklogTasksByProjectDocumentId = (
   start = 0,
   limit = 10,
 ) => {
-  return fetchData(
+  return fetchData (
     `tasks?filters[task_status][title][$eq]=Backlog&filters[project][documentId][$eq]=${documentId}&pagination[start]=${start}&pagination[limit]=${limit}&populate=*`,
   );
 };

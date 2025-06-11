@@ -4,40 +4,40 @@ function Pagination({ totalPages, currentPage, onPageChanged }) {
   for (let i = 0; i < totalPages; i++) {
     const pageNumber = i + 1;
     pageLinks.push(
-      <li key={pageNumber}>
+      <li className="pagination__item" key={pageNumber}>
         <button
           className={
-            "pagination-link " +
-            (pageNumber === currentPage ? "is-current" : "")
+            "pagination__link" +
+            (pageNumber === currentPage ? " pagination__link--current" : "")
           }
-          aria-label={"Go to Page " + pageNumber}
+          aria-label={`Go to Page ${pageNumber}`}
           aria-current={pageNumber === currentPage}
           onClick={() => onPageChanged(pageNumber)}
           style={{ cursor: "pointer" }}
         >
           {pageNumber}
         </button>
-      </li>
+      </li>,
     );
   }
 
   return (
     <nav className="pagination" role="navigation" aria-label="pagination">
       <button
-        className="pagination-previous"
+        className="pagination__previous"
         disabled={currentPage === 1}
         onClick={() => onPageChanged(currentPage - 1)}
       >
         Previous
       </button>
       <button
-        className="pagination-next"
+        className="pagination__next"
         disabled={currentPage === totalPages}
         onClick={() => onPageChanged(currentPage + 1)}
       >
         Next page
       </button>
-      <ul className="pagination-list">{pageLinks}</ul>
+      <ul className="pagination__list">{pageLinks}</ul>
     </nav>
   );
 }

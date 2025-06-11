@@ -1,7 +1,7 @@
 import { useState } from "react";
 import AddTaskModal from "../../Tasks/AddTaskModal";
 
-function AddTask() {
+function AddTaskBtn() {
   const [showModal, setShowModal] = useState(false);
 
   const handleClick = () => {
@@ -25,4 +25,4 @@ function AddTask() {
   );
 }
 
-export default AddTask;
+export default AddTaskBtn;

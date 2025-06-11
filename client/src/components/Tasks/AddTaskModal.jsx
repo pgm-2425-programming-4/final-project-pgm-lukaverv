@@ -12,22 +12,25 @@ function AddTaskModal({ onClose, onTaskAdded }) {
   const [description, setDescription] = useState("");
   const [project, setProject] = useState("");
   const [taskStatus, setTaskStatus] = useState("");
-  const [labels, setLabels] = useState([]);
+  const [labels, setLabels] = useState([]); 
 
-  const { data: allProjects = [] } = useQuery({
+  const { data: allProjects = {} } = useQuery({
     queryKey: ["projects"],
     queryFn: getProjects,
   });
+  const projects = allProjects.data || [];
 
-  const { data: allStatuses = [] } = useQuery({
+  const { data: allStatuses = {} } = useQuery({
     queryKey: ["statuses"],
     queryFn: getStatuses,
   });
+  const statuses = allStatuses.data || [];
 
-  const { data: allLabels = [] } = useQuery({
+  const { data: allLabels = {} } = useQuery({
     queryKey: ["labels"],
     queryFn: getLabels,
   });
+  const labelsList = allLabels.data || [];
 
   const mutation = useMutation({
     mutationFn: createTask,
@@ -81,7 +84,7 @@ function AddTaskModal({ onClose, onTaskAdded }) {
               required
             >
               <option value="">Select a project</option>
-              {allProjects.map((project) => (
+              {projects.map((project) => (
                 <option key={project.id} value={project.id}>
                   {project.title}
                 </option>
@@ -101,7 +104,7 @@ function AddTaskModal({ onClose, onTaskAdded }) {
                 required
               >
                 <option value="">Select a status</option>
-                {allStatuses.map((status) => (
+                {statuses.map((status) => (
                   <option key={status.id} value={status.id}>
                     {status.title}
                   </option>
@@ -121,12 +124,12 @@ function AddTaskModal({ onClose, onTaskAdded }) {
                   setLabels(
                     Array.from(
                       e.target.selectedOptions,
-                      (option) => option.value
-                    )
+                      (option) => option.value,
+                    ),
                   )
                 }
               >
-                {allLabels.map((label) => (
+                {labelsList.map((label) => (
                   <option key={label.id} value={label.id}>
                     {label.title}
                   </option>

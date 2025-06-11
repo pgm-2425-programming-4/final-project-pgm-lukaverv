@@ -1,24 +1,25 @@
 import { useNavigate } from "@tanstack/react-router";
 
-function Backlog({ projectId }) {
+function BacklogBtn({ projectId }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    console.log("Navigating to backlog for project:", projectId);
     if (projectId) {
       navigate({
         to: `/projects/${projectId}/backlog`,
       });
     }
   };
+
   return (
     <button
-      onClick={handleClick}
       className="main__button main__button--view-backlog"
+      onClick={handleClick}
+      disabled={!projectId}
     >
       Backlog
     </button>
   );
 }
 
-export default Backlog;
+export default BacklogBtn;

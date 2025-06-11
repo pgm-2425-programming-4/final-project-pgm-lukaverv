@@ -2,20 +2,26 @@ import Pagination from "./Pagination";
 import { useState } from "react";
 import { useParams } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { getBacklogTasksByProjectDocumentId } from "../../services/api.js";
+import {
+  getBacklogTasksByProjectDocumentId,
+  getProjectByDocumentId,
+} from "../../services/api.js";
 
 function Backlog() {
-  const { projectId } = useParams();
+  const params = useParams({ strict: false });
+  const projectId = params.projectId;
+
   const [currentPage, setCurrentPage] = useState(1);
 
-  const limit = 2;
+  const limit = 10;
   const start = (currentPage - 1) * limit;
 
-  const {
-    data,
-    isLoading,
-    error,
-  } = useQuery({
+  const { data: projectData, isLoading: loadingProject } = useQuery({
+    queryKey: ["project", projectId],
+    queryFn: () => getProjectByDocumentId(projectId),
+  });
+
+  const { data, isLoading, error } = useQuery({
     queryKey: ["backlogTasks", projectId, start, limit],
     queryFn: () => getBacklogTasksByProjectDocumentId(projectId, start, limit),
   });
@@ -24,29 +30,38 @@ function Backlog() {
     setCurrentPage(page);
   }
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Failed to load tasks.</p>;
+  if (loadingProject || isLoading)
+    return <p className="backlog__loading">Loading...</p>;
+  if (error) return <p className="backlog__error">Failed to load tasks.</p>;
 
-  const tasks = data?.data
-  const pagination = data?.meta?.pagination
+  const project = projectData.data[0];
+  const tasks = data.data || [];
+  const pagination = data.meta.pagination;
 
   return (
     <div className="backlog">
-      <h2>Backlog Taken</h2>
-      <ul>
+      <h2 className="backlog__title">Backlog for {project.title}</h2>
+      <ul className="backlog__list">
         {tasks.length > 0 ? (
-          tasks.map((task) => <li key={task.id}>{task.title}</li>)
+          tasks.map((task) => (
+            <li className="backlog__item" key={task.id}>
+              <span className="backlog__task-title">{task.title}</span>
+            </li>
+          ))
         ) : (
-          <li>No backlog tasks found.</li>
+          <li className="backlog__item backlog__item--empty">
+            No backlog tasks found.
+          </li>
         )}
       </ul>
-
       {pagination && (
-        <Pagination
-          totalPages={Math.ceil(pagination.total / limit)}
-          currentPage={currentPage}
-          onPageChanged={handlePageChange}
-        />
+        <div className="backlog__pagination">
+          <Pagination
+            totalPages={Math.ceil(pagination.total / limit)}
+            currentPage={currentPage}
+            onPageChanged={handlePageChange}
+          />
+        </div>
       )}
     </div>
   );

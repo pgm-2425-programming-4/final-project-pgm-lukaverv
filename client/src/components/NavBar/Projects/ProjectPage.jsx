@@ -34,7 +34,7 @@ function ProjectPage() {
           <TaskStatus
             key={status}
             statusTitle={status}
-            tasks={tasks.filter((task) => task.task_status.title === status)}
+            tasks={tasks.data.filter((task) => task.task_status.title === status)}
           />
         ))}
       </div>
