@@ -18,7 +18,6 @@ function Backlog() {
   } = useQuery({
     queryKey: ["backlogTasks", projectId, start, limit],
     queryFn: () => getBacklogTasksByProjectDocumentId(projectId, start, limit),
-    keepPreviousData: true,
   });
 
   function handlePageChange(page) {
@@ -28,8 +27,8 @@ function Backlog() {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Failed to load tasks.</p>;
 
-  const tasks = data
-  const pagination = data.meta.pagination
+  const tasks = data?.data
+  const pagination = data?.meta?.pagination
 
   return (
     <div className="backlog">

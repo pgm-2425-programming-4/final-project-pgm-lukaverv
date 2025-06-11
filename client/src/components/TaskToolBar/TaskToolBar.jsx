@@ -22,7 +22,7 @@ function TaskToolBar({ projectId }) {
         <div>
           <p className="main__active-project">Active Project: PGM3</p>
           <AddTask />
-          <Backlog activeProjectId={projectId} />
+          <Backlog projectId={projectId} />
         </div>
       </section>
     </>

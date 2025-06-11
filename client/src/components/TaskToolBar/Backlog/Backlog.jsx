@@ -1,12 +1,13 @@
 import { useNavigate } from "@tanstack/react-router";
 
-function Backlog({ activeProjectId }) {
+function Backlog({ projectId }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    if (activeProjectId) {
+    console.log("Navigating to backlog for project:", projectId);
+    if (projectId) {
       navigate({
-        to: `/projects/${activeProjectId}/backlog`,
+        to: `/projects/${projectId}/backlog`,
       });
     }
   };
