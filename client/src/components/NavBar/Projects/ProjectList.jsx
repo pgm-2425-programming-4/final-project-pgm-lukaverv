@@ -20,7 +20,7 @@ function ProjectList() {
       {projects.map((project) => (
         <Link
           key={project.id}
-          to={`/project/${project.documentId}`}
+          to={`/projects/${project.documentId}`}
           className="header__project header__item"
         >
           {project.title}

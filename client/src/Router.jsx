@@ -7,6 +7,7 @@ import App from "./App";
 import Home from "./components/NavBar/Home/Home";
 import About from "./components/NavBar/About/About";
 import ProjectPage from "./components/NavBar/Projects/ProjectPage";
+import Backlog from "./components/PaginatedBacklog/Backlog";
 
 const rootRoute = createRootRoute({
   component: App,
@@ -27,10 +28,16 @@ const aboutRoute = createRoute({
 const projectRoute = createRoute({
   component: ProjectPage,
   getParentRoute: () => rootRoute,
-  path: "/project/$projectId",
+  path: "/projects/$projectId",
 });
 
-rootRoute.addChildren([homeRoute, aboutRoute, projectRoute]);
+const backlogRoute = createRoute({
+  component: Backlog,
+  getParentRoute: () => rootRoute,
+  path: "/projects/$projectId/backlog",
+})
+
+rootRoute.addChildren([homeRoute, aboutRoute, projectRoute, backlogRoute]);
 
 const router = createRouter({ routeTree: rootRoute });
 
