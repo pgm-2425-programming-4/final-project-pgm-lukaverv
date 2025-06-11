@@ -1,6 +1,6 @@
 import Pagination from "./Pagination";
 import { useState } from "react";
-import { useParams } from "@tanstack/react-router";
+import { useParams, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import {
   getBacklogTasksByProjectDocumentId,
@@ -10,6 +10,7 @@ import {
 function Backlog() {
   const params = useParams({ strict: false });
   const projectId = params.projectId;
+  const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -40,6 +41,10 @@ function Backlog() {
 
   return (
     <div className="backlog">
+      <button
+        className="backlog__back button"
+        onClick={() => navigate({ to: `/projects/${projectId}` })}
+      >Go Back</button>
       <h2 className="backlog__title">Backlog for {project.title}</h2>
       <ul className="backlog__list">
         {tasks.length > 0 ? (

@@ -22,23 +22,27 @@ function Pagination({ totalPages, currentPage, onPageChanged }) {
   }
 
   return (
-    <nav className="pagination" role="navigation" aria-label="pagination">
-      <button
-        className="pagination__previous"
-        disabled={currentPage === 1}
-        onClick={() => onPageChanged(currentPage - 1)}
-      >
-        Previous
-      </button>
-      <button
-        className="pagination__next"
-        disabled={currentPage === totalPages}
-        onClick={() => onPageChanged(currentPage + 1)}
-      >
-        Next page
-      </button>
-      <ul className="pagination__list">{pageLinks}</ul>
-    </nav>
+    <>
+      <div className="pagination__page">
+        <nav className="pagination" role="navigation" aria-label="pagination">
+          <button
+            className="pagination__previous button"
+            disabled={currentPage === 1}
+            onClick={() => onPageChanged(currentPage - 1)}
+          >
+            Previous
+          </button>
+          <button
+            className="pagination__next button"
+            disabled={currentPage === totalPages}
+            onClick={() => onPageChanged(currentPage + 1)}
+          >
+            Next page
+          </button>
+        </nav>
+        <ul className="pagination__list">{pageLinks}</ul>
+      </div>
+    </>
   );
 }
 

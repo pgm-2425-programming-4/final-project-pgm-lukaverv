@@ -1,0 +1,82 @@
+.backlog {
+  position: relative;
+  min-width: 600px;
+  background: var(--bg-100);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.29);
+  padding: 2rem;
+  .button {
+    background: var(--bg-200);
+    color: var(--text-100);
+  }
+}
+
+.backlog__back {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+}
+
+.backlog__title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.backlog__list {
+  padding: 0;
+  margin: 2rem 0;
+}
+
+.backlog__item {
+  margin: 1rem 0;
+  font-size: 1.2rem;
+}
+
+.backlog__item:last-child {
+  border-bottom: none;
+}
+
+.backlog__item--empty {
+  color: #aaa;
+  text-align: center;
+  font-style: italic;
+}
+
+.backlog__task-title {
+  font-weight: 500;
+}
+
+.backlog__pagination {
+  display: flex;
+  margin-top: 1rem;
+}
+
+.backlog__loading,
+.backlog__error {
+  text-align: center;
+  color: #888;
+  margin: 2rem 0;
+}
+
+.pagination__page {
+  display: flex;
+  flex-direction: column;
+  button {
+    background: var(--bg-200);
+    color: var(--text-100);
+  }
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pagination__list {
+  margin: 0.8rem 0;
+  display: flex;
+  gap: 0.5rem;
+}
