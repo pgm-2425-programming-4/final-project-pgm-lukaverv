@@ -35,7 +35,7 @@ const backlogRoute = createRoute({
   component: Backlog,
   getParentRoute: () => rootRoute,
   path: "/projects/$projectId/backlog",
-})
+});
 
 rootRoute.addChildren([homeRoute, aboutRoute, projectRoute, backlogRoute]);
 

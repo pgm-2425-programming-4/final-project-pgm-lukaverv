@@ -28,7 +28,7 @@ function ProjectPage() {
   return (
     <section className="project">
       <h1 className="project__title">{project.title}</h1>
-      <TaskToolBar />
+      <TaskToolBar projectId={projectId} />
       <div className="main__task-status">
         {statuses.map((status) => (
           <TaskStatus

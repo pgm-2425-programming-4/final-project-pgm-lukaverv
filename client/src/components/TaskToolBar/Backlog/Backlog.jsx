@@ -1,7 +1,14 @@
-function Backlog() {
+import { useNavigate } from "@tanstack/react-router";
+
+function Backlog({ activeProjectId }) {
+  const navigate = useNavigate();
+
   const handleClick = () => {
-    // Logic to handle adding a task
-    console.log("Backlog button clicked");
+    if (activeProjectId) {
+      navigate({
+        to: `/projects/${activeProjectId}/backlog`,
+      });
+    }
   };
   return (
     <button
