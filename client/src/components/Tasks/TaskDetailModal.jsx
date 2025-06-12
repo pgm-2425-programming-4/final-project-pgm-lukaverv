@@ -1,32 +1,39 @@
 import { useState } from "react";
 import { getStatuses, updateTaskStatus } from "../../services/api";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 function TaskDetailModal({ task, onClose }) {
-  console.log("TaskDetailModal rendered with task:", task);
-
   const { data: allStatuses } = useQuery({
     queryKey: ["statuses"],
     queryFn: getStatuses,
   });
 
   const statuses = allStatuses?.data || [];
-
-  if (statuses.length > 0) {
-    console.log("Fetched statuses:", statuses);
-  }
-
-  const [selectedStatus, setSelectedStatus] = useState(task.task_status.documentId);
+  const originalStatus = task.task_status?.documentId;
+  const [selectedStatus, setSelectedStatus] = useState(
+    task.task_status.documentId,
+  );
+  const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: ({ taskId, statusId }) => updateTaskStatus(taskId, statusId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["tasks"],
+      });
+      onClose();
+    },
   });
 
   const handleStatusChange = (e) => {
-    const newStatusId = e.target.value;
-    console.log("Changing status to:", newStatusId);
-    setSelectedStatus(newStatusId);
-    mutation.mutate({ taskId: task.documentId, statusId: newStatusId });
+    setSelectedStatus(e.target.value);
+  };
+
+  const handleSave = () => {
+    mutation.mutate({
+      taskId: task.documentId,
+      statusId: selectedStatus,
+    });
   };
 
   if (!task) return null;
@@ -50,7 +57,6 @@ function TaskDetailModal({ task, onClose }) {
             <select
               value={selectedStatus}
               onChange={handleStatusChange}
-              disabled={mutation.isLoading}
               className="modal__status-select"
             >
               {statuses.map((status) => (
@@ -59,8 +65,14 @@ function TaskDetailModal({ task, onClose }) {
                 </option>
               ))}
             </select>
-            {mutation.isLoading && (
-              <span className="modal__status-loading">Updating...</span>
+            {selectedStatus !== originalStatus && (
+              <button
+                className="modal__save-status button"
+                onClick={handleSave}
+                disabled={mutation.isLoading}
+              >
+                {mutation.isLoading ? "Saving..." : "Save Status"}
+              </button>
             )}
           </div>
           <div className="modal__labels">

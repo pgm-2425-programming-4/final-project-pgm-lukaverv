@@ -35,9 +35,9 @@ function Backlog() {
     return <p className="backlog__loading">Loading...</p>;
   if (error) return <p className="backlog__error">Failed to load tasks.</p>;
 
-  const project = projectData.data[0];
-  const tasks = data.data || [];
-  const pagination = data.meta.pagination;
+  const project = projectData?.data[0];
+  const tasks = data?.data || [];
+  const pagination = data?.meta.pagination;
 
   return (
     <div className="backlog">
