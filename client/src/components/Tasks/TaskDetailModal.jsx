@@ -39,7 +39,7 @@ function TaskDetailModal({ task, onClose }) {
   if (!task) return null;
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div className="modal-overlay modal-overlay--detail" onClick={onClose}>
       <section className="modal" onClick={(e) => e.stopPropagation()}>
         <button className="modal__close" onClick={onClose}>
           X

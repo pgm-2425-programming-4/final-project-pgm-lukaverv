@@ -4,6 +4,8 @@
 @import url("./styles/pages/home.css");
 @import url("./styles/pages/backlog.css");
 
+@import url("./styles/pages/modal-detail.css");
+
 @import url("./styles/layout/header.css");
 @import url("./styles/layout/bar.css");
 @import url("./styles/layout/status.css");
@@ -19,4 +21,5 @@
   --txt-200: rgb(34, 34, 34);
   --accent-100: rgb(29, 205, 159);
   --accent-200: rgb(78, 113, 255);
+  --accent-300: rgb(34, 34, 34); /* charcoal, matches your txt-200 */
 }
