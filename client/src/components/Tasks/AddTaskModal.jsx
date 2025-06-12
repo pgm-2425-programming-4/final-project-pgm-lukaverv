@@ -12,7 +12,7 @@ function AddTaskModal({ onClose, onTaskAdded }) {
   const [description, setDescription] = useState("");
   const [project, setProject] = useState("");
   const [taskStatus, setTaskStatus] = useState("");
-  const [labels, setLabels] = useState([]); 
+  const [labels, setLabels] = useState([]);
 
   const { data: allProjects = {} } = useQuery({
     queryKey: ["projects"],

@@ -1,8 +1,45 @@
+import { useState } from "react";
+import { getStatuses, updateTaskStatus } from "../../services/api";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+
 function TaskDetailModal({ task, onClose }) {
+  const { data: allStatuses } = useQuery({
+    queryKey: ["statuses"],
+    queryFn: getStatuses,
+  });
+
+  const statuses = allStatuses?.data || [];
+  const originalStatus = task.task_status?.documentId;
+  const [selectedStatus, setSelectedStatus] = useState(
+    task.task_status.documentId,
+  );
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: ({ taskId, statusId }) => updateTaskStatus(taskId, statusId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["tasks"],
+      });
+      onClose();
+    },
+  });
+
+  const handleStatusChange = (e) => {
+    setSelectedStatus(e.target.value);
+  };
+
+  const handleSave = () => {
+    mutation.mutate({
+      taskId: task.documentId,
+      statusId: selectedStatus,
+    });
+  };
+
   if (!task) return null;
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div className="modal-overlay modal-overlay--detail" onClick={onClose}>
       <section className="modal" onClick={(e) => e.stopPropagation()}>
         <button className="modal__close" onClick={onClose}>
           X
@@ -15,9 +52,29 @@ function TaskDetailModal({ task, onClose }) {
           <p className="modal__description">
             <strong>Description:</strong> {task.description || "No description"}
           </p>
-          <p className="modal__status">
-            <strong>Status:</strong> {task.task_status?.title || "Unknown"}
-          </p>
+          <div className="modal__status">
+            <strong>Status:</strong>{" "}
+            <select
+              value={selectedStatus}
+              onChange={handleStatusChange}
+              className="modal__status-select"
+            >
+              {statuses.map((status) => (
+                <option key={status.documentId} value={status.documentId}>
+                  {status.title}
+                </option>
+              ))}
+            </select>
+            {selectedStatus !== originalStatus && (
+              <button
+                className="modal__save-status button"
+                onClick={handleSave}
+                disabled={mutation.isLoading}
+              >
+                {mutation.isLoading ? "Saving..." : "Save Status"}
+              </button>
+            )}
+          </div>
           <div className="modal__labels">
             <strong>Labels:</strong>
             <ul className="modal__labels-list">

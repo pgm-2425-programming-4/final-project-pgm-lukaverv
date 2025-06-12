@@ -31,10 +31,12 @@ function TaskStatus({ statusTitle, tasks }) {
           ))
         )}
       </div>
-      <TaskDetailModal
-        task={selectedTask}
-        onClose={() => setSelectedTask(null)}
-      />
+      {selectedTask && (
+        <TaskDetailModal
+          task={selectedTask}
+          onClose={() => setSelectedTask(null)}
+        />
+      )}
     </article>
   );
 }
