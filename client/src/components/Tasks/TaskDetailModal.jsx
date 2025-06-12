@@ -1,4 +1,14 @@
+import { getStatuses, updateTaskStatus } from "../../services/api";
+import { useQuery, useMutation } from "@tanstack/react-query";
+
 function TaskDetailModal({ task, onClose }) {
+  const { data: allStatuses } = useQuery({
+    queryKey: ["statuses"],
+    queryFn: getStatuses,
+  });
+
+  const statuses = allStatuses.data || [];
+
   if (!task) return null;
 
   return (
