@@ -69,3 +69,21 @@ export const createTask = async (taskData) => {
   const json = await response.json();
   return json;
 };
+
+// Functie met PATCH request om een taak bij te werken
+export const updateTaskStatus = async (taskId, statusId) => {
+  const response = await fetch(`${API_URL}/tasks/${taskId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${API_TOKEN}`,
+    },
+    body: JSON.stringify({
+      data: {
+        task_status: statusId,
+      },
+    }),
+  });
+  const json = await response.json();
+  return json;
+};
