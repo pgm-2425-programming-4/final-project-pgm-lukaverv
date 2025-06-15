@@ -5,7 +5,7 @@ import {
   getProjects,
   createTask,
 } from "../../services/api.js";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 function AddTaskModal({ onClose, onTaskAdded }) {
   const [title, setTitle] = useState("");
@@ -32,9 +32,14 @@ function AddTaskModal({ onClose, onTaskAdded }) {
   });
   const labelsList = allLabels.data || [];
 
+  const queryClient = useQueryClient();
+
   const mutation = useMutation({
     mutationFn: createTask,
     onSuccess: (newTask) => {
+      queryClient.invalidateQueries({
+        queryKey: ["tasks"],
+      });
       onTaskAdded?.(newTask);
       onClose();
     },

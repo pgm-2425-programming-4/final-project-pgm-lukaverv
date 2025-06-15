@@ -1,7 +1,7 @@
-import AddTaskBtn from "./Tasks/AddTaskBtn"
-import BacklogBtn from "./Backlog/BacklogBtn"
+import AddTaskBtn from "./Tasks/AddTaskBtn";
+import BacklogBtn from "./Backlog/BacklogBtn";
 
-function TaskToolBar({ projectId }) {
+function TaskToolBar({ projectTitle, projectId }) {
   return (
     <>
       <section className="main__project-options">
@@ -20,7 +20,7 @@ function TaskToolBar({ projectId }) {
           />
         </div>
         <div>
-          <p className="main__active-project">Active Project: PGM3</p>
+          <p className="main__active-project">Active Project: {projectTitle}</p>
           <AddTaskBtn />
           <BacklogBtn projectId={projectId} />
         </div>
