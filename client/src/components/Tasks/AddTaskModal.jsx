@@ -70,7 +70,7 @@ function AddTaskModal({ onClose, onTaskAdded }) {
             </label>
             <input
               id="task-title"
-              className="modal__input"
+              className="modal__input input"
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -83,7 +83,7 @@ function AddTaskModal({ onClose, onTaskAdded }) {
             </label>
             <select
               id="task-project"
-              className="modal__input"
+              className="modal__input select"
               value={project}
               onChange={(e) => setProject(e.target.value)}
               required
@@ -103,7 +103,7 @@ function AddTaskModal({ onClose, onTaskAdded }) {
               </label>
               <select
                 id="task-status"
-                className="modal__input"
+                className="modal__input select"
                 value={taskStatus}
                 onChange={(e) => setTaskStatus(e.target.value)}
                 required
@@ -122,7 +122,7 @@ function AddTaskModal({ onClose, onTaskAdded }) {
               </label>
               <select
                 id="task-labels"
-                className="modal__input"
+                className="modal__input select"
                 multiple
                 value={labels}
                 onChange={(e) =>
@@ -148,7 +148,7 @@ function AddTaskModal({ onClose, onTaskAdded }) {
             </label>
             <textarea
               id="task-description"
-              className="modal__input"
+              className="modal__input txtarea"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />

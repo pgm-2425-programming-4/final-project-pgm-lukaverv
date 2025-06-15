@@ -67,7 +67,7 @@ function TaskDetailModal({ task, onClose }) {
             <select
               value={selectedStatus}
               onChange={handleStatusChange}
-              className="modal__status-select"
+              className="modal__status-select select"
             >
               {statuses.map((status) => (
                 <option key={status.documentId} value={status.documentId}>
