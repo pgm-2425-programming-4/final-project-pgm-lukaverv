@@ -1,11 +1,15 @@
-input, select, textarea {
-    cursor: pointer;
-    width: fit-content;
-    border: none;
-    border-radius: .25rem;
-    background-color: var(--bg-200);
+input,
+select,
+textarea {
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  font-size: 1rem;
+  height: 2.5rem;
+  background-color: var(--bg-200);
+  color: var(--txt-200);
+  &::placeholder {
     color: var(--txt-200);
-    &::placeholder {
-        color: var(--txt-200);
-    }
+  }
 }
