@@ -1,4 +1,5 @@
 .main__project-options {
+    min-width: 58rem;
     background-color: var(--bg-100);
     border-radius: .5rem;
     padding: 1rem;
@@ -9,4 +10,8 @@
         display: flex;
         gap: 1rem;
     }
+}
+
+.main__active-project {
+    align-self: center;
 }
