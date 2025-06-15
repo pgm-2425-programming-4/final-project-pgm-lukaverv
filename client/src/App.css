@@ -9,6 +9,7 @@
 @import url("./styles/components/button.css");
 @import url("./styles/components/input.css");
 @import url("./styles/components/modal.css");
+@import url("./styles/components/select.css");
 
 :root {
   --bg-100: rgb(255, 253, 240);
