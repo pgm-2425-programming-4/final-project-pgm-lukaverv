@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getStatuses, updateTaskStatus } from "../../services/api";
+import { getStatuses, updateTaskStatus, deleteTask } from "../../services/api";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 function TaskDetailModal({ task, onClose }) {
@@ -15,8 +15,18 @@ function TaskDetailModal({ task, onClose }) {
   );
   const queryClient = useQueryClient();
 
-  const mutation = useMutation({
+  const updateMutation = useMutation({
     mutationFn: ({ taskId, statusId }) => updateTaskStatus(taskId, statusId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["tasks"],
+      });
+      onClose();
+    },
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: (taskId) => deleteTask(taskId),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["tasks"],
@@ -30,7 +40,7 @@ function TaskDetailModal({ task, onClose }) {
   };
 
   const handleSave = () => {
-    mutation.mutate({
+    updateMutation.mutate({
       taskId: task.documentId,
       statusId: selectedStatus,
     });
@@ -65,15 +75,24 @@ function TaskDetailModal({ task, onClose }) {
                 </option>
               ))}
             </select>
-            {selectedStatus !== originalStatus && (
+            <div className="modal__buttons">
+              {selectedStatus !== originalStatus && (
+                <button
+                  className="modal__button-save"
+                  onClick={handleSave}
+                  disabled={updateMutation.isLoading}
+                >
+                  {updateMutation.isLoading ? "Saving..." : "Save Status"}
+                </button>
+              )}
               <button
-                className="modal__save-status button"
-                onClick={handleSave}
-                disabled={mutation.isLoading}
+                className="modal__button-delete"
+                onClick={() => deleteMutation.mutate(task.documentId)}
+                disabled={deleteMutation.isLoading}
               >
-                {mutation.isLoading ? "Saving..." : "Save Status"}
+                {deleteMutation.isLoading ? "Deleting..." : "Delete Task"}
               </button>
-            )}
+            </div>
           </div>
           <div className="modal__labels">
             <strong>Labels:</strong>
