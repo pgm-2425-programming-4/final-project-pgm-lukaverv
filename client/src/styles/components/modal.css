@@ -29,12 +29,16 @@
   font-size: 1.5rem;
 }
 
-.modal__save-status {
+.modal__buttons {
   position: absolute;
+  display: flex;
+  gap: 0.4rem;
   bottom: 0.5rem;
   right: 0.5rem;
-  background-color: var(--accent-300);
-  color: var(--bg-200);
+  button {
+    background-color: var(--accent-300);
+    color: var(--bg-200);
+  }
 }
 
 .modal__button {
