@@ -7,7 +7,7 @@ import {
 import TaskStatus from "../../Tasks/TaskStatus";
 import TaskToolBar from "../../TaskToolBar/TaskToolBar";
 
-function ProjectPage() {
+function ProjectPage(projectId, projectTitle) {
   const { projectId } = useParams({ strict: false });
 
   const { data: project, isLoading: loadingProject } = useQuery({
