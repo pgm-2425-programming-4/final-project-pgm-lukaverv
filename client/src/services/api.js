@@ -95,6 +95,8 @@ export const deleteTask = async (taskId) => {
       Authorization: `Bearer ${API_TOKEN}`,
     }
   });
-  const json = await response.json();
-  return json;
-}
+  if (response.status === 200) {
+    return await response.json();
+  }
+  return true;
+};
