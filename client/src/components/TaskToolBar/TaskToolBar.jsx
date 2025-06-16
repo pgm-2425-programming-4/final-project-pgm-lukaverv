@@ -1,22 +1,35 @@
+import { useQuery } from "@tanstack/react-query";
+import { getLabels } from "../../services/api";
 import AddTaskBtn from "./Tasks/AddTaskBtn";
 import BacklogBtn from "./Backlog/BacklogBtn";
 
-function TaskToolBar({ projectTitle, projectId }) {
+function TaskToolBar({ projectTitle, projectId, onFilterTasks }) {
+  const { data: allLabels } = useQuery({
+    queryKey: ["labels"],
+    queryFn: getLabels,
+  });
+
+  const labels = allLabels?.data || [];
+
   return (
     <>
       <section className="main__project-options">
         <div className="main__filter">
-          <select id="filter" className="main__filter-select select">
+          <select
+            onChange={(e) => onFilterTasks(e.target.value)}
+            className="main__filter-select select"
+          >
             <option value="all">All</option>
-            <option value="back-end">Back-End</option>
-            <option value="front-end">Front-End</option>
-            <option value="documentation">Documentation</option>
-            <option value="infra">Infra</option>
+            {labels.map((label) => (
+              <option key={label.documentId} value={label.title}>
+                {label.title}
+              </option>
+            ))}
           </select>
           <input
             type="text"
             className="main__search-input input"
-            placeholder="Search by description"
+            placeholder="Search by title"
           />
         </div>
         <div className="main__project-info">
