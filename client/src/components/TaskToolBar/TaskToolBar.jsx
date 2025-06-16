@@ -1,12 +1,9 @@
-import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getLabels } from "../../services/api";
 import AddTaskBtn from "./Tasks/AddTaskBtn";
 import BacklogBtn from "./Backlog/BacklogBtn";
 
-function TaskToolBar({ projectTitle, projectId }) {
-  const [selectedLabel, setSelectedLabel] = useState("");
-
+function TaskToolBar({ projectTitle, projectId, onFilterTasks }) {
   const { data: allLabels } = useQuery({
     queryKey: ["labels"],
     queryFn: getLabels,
@@ -19,8 +16,7 @@ function TaskToolBar({ projectTitle, projectId }) {
       <section className="main__project-options">
         <div className="main__filter">
           <select
-            value={selectedLabel}
-            onChange={(e) => setSelectedLabel(e.target.value)}
+            onChange={(e) => onFilterTasks(e.target.value)}
             className="main__filter-select select"
           >
             <option value="all">All</option>
