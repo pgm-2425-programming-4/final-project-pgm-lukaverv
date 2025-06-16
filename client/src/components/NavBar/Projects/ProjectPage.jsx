@@ -1,4 +1,5 @@
 import { useParams } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import {
   getProjectByDocumentId,
@@ -9,6 +10,18 @@ import TaskToolBar from "../../TaskToolBar/TaskToolBar";
 
 function ProjectPage() {
   const { projectId } = useParams({ strict: false });
+  const [filteredTasks, setFilteredTasks] = useState([]);
+
+  const handleFilterTasks = (selectedLabel) => {
+    if (!selectedLabel || selectedLabel === "all") {
+      setFilteredTasks(tasks.data);
+    } else {
+      const filtered = tasks.data.filter((task) =>
+        task.labels.some((label) => label.title === selectedLabel),
+      );
+      setFilteredTasks(filtered);
+    }
+  };
 
   const { data: project, isLoading: loadingProject } = useQuery({
     queryKey: ["project", projectId],
@@ -20,6 +33,12 @@ function ProjectPage() {
     queryFn: () => getTasksByProjectDocumentId(projectId),
   });
 
+  useEffect(() => {
+    if (tasks?.data) {
+      setFilteredTasks(tasks.data);
+    }
+  }, [tasks]);
+
   const statuses = ["To Do", "In Progress", "Ready For Review", "Done"];
 
   if (loadingProject || loadingTasks) return <p>Loading...</p>;
@@ -27,13 +46,19 @@ function ProjectPage() {
 
   return (
     <section className="project">
-      <TaskToolBar projectTitle={project.data[0].title} projectId={projectId} />
+      <TaskToolBar
+        projectTitle={project.data[0].title}
+        onFilterTasks={handleFilterTasks}
+        projectId={projectId}
+      />
       <div className="main__task-status">
         {statuses.map((status) => (
           <TaskStatus
             key={status}
             statusTitle={status}
-            tasks={tasks.data.filter((task) => task.task_status.title === status)}
+            tasks={filteredTasks.filter(
+              (task) => task.task_status.title === status,
+            )}
           />
         ))}
       </div>
