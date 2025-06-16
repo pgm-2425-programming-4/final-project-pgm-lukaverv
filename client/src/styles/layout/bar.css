@@ -1,6 +1,5 @@
 .main__project-options {
-    min-width: 58rem;
-    max-width: 80rem;
+    width: 80rem;
     background-color: var(--bg-100);
     border-radius: .5rem;
     padding: 1rem;
