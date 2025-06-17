@@ -22,6 +22,10 @@
   position: relative;
 }
 
+.modal--project {
+  height: 30%
+}
+
 .modal__close {
   position: absolute;
   top: 0.5rem;

@@ -1,7 +1,19 @@
+import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import ProjectList from "./Projects/ProjectList.jsx";
+import AddProjectModal from "./Projects/AddProjectModal.jsx";
 
 function NavBar() {
+  const [showAddProjectModal, setShowAddProjectModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setShowAddProjectModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowAddProjectModal(false);
+  };
+
   return (
     <>
       <header className="header">
@@ -16,6 +28,13 @@ function NavBar() {
             About
           </Link>
         </nav>
+        <button
+          className="header__button header__button--add-project"
+          onClick={handleOpenModal}
+        >
+          New Project
+        </button>
+        {showAddProjectModal && <AddProjectModal onClose={handleCloseModal} />}
       </header>
     </>
   );

@@ -1,29 +1,45 @@
 header {
-    border-right: .125rem solid;
-    padding: 2rem;
-    .header__title {
-        color: var(--txt-200);
-    }
-    .header__navigation {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
-    .header__item {
-        text-decoration: none;
-        color: var(--txt-200);
-        cursor: pointer;
-        text-align: center;
-        padding: 0.4rem;
-        border-radius: .5rem;
-    }
-    .header__item:hover {
-        text-decoration: underline;
-    }
-    .header__projects {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        gap: 0.6rem;
-    }
+  min-width: 11rem;
+  position: relative;
+  border-right: 0.125rem solid;
+  padding: 2rem;
+  .header__title {
+    color: var(--txt-200);
+  }
+  .header__navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .header__item {
+    text-decoration: none;
+    color: var(--txt-200);
+    cursor: pointer;
+    text-align: center;
+    padding: 0.4rem;
+    border-radius: 0.5rem;
+  }
+  .header__item:hover {
+    text-decoration: underline;
+  }
+  .header__projects {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+}
+
+.header__button--add-project {
+  position: absolute;
+  width: max-content;
+  bottom: 1rem;
+  right: 1rem;
+  left: 1rem;
+  border: 2px solid var(--accent-300);
+}
+
+.main__button--add-project {
+  width: max-content;
+  border: 2px solid var(--accent-300);
 }
