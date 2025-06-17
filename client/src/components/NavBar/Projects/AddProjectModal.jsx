@@ -21,7 +21,7 @@ function AddProjectModal({ onClose }) {
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <section className="modal" onClick={(e) => e.stopPropagation()}>
+      <section className="modal modal--project" onClick={(e) => e.stopPropagation()}>
         <h2 className="modal__title">Add New Project</h2>
         <button className="modal__close" onClick={onClose}>
           X
@@ -33,7 +33,7 @@ function AddProjectModal({ onClose }) {
             </label>
             <input
               id="project-title"
-              className="modal__input input"
+              className="modal__input modal__input--project-title input"
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -42,7 +42,7 @@ function AddProjectModal({ onClose }) {
           </div>
           <button
             type="submit"
-            className="modal__button main__button--add-task"
+            className="modal__button main__button--add-project"
             disabled={createProjectMutation.isLoading}
           >
             {createProjectMutation.isLoading ? "Adding Project..." : "Add Project"}

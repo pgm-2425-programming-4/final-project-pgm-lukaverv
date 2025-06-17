@@ -32,7 +32,7 @@ function NavBar() {
           className="header__button header__button--add-project"
           onClick={handleOpenModal}
         >
-          Add Project
+          New Project
         </button>
         {showAddProjectModal && <AddProjectModal onClose={handleCloseModal} />}
       </header>
