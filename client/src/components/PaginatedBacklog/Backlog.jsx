@@ -13,8 +13,8 @@ function Backlog() {
   const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = useState(1);
+  const [limit, setLimit] = useState(10);
 
-  const limit = 10;
   const start = (currentPage - 1) * limit;
 
   const { data: projectData, isLoading: loadingProject } = useQuery({
@@ -44,7 +44,9 @@ function Backlog() {
       <button
         className="backlog__back button"
         onClick={() => navigate({ to: `/projects/${projectId}` })}
-      >Go Back</button>
+      >
+        Go Back
+      </button>
       <h2 className="backlog__title">Backlog for {project.title}</h2>
       <ul className="backlog__list">
         {tasks.length > 0 ? (
@@ -59,6 +61,17 @@ function Backlog() {
           </li>
         )}
       </ul>
+      <div className="backlog__limit">
+        <select
+          className="backlog__select select"
+          value={limit}
+          onChange={(e) => setLimit(Number(e.target.value))} 
+        >
+          <option value={5}>5 items per page</option>
+          <option value={10}>10 items per page</option>
+          <option value={20}>20 items per page</option>
+        </select>
+      </div>
       {pagination && (
         <div className="backlog__pagination">
           <Pagination
