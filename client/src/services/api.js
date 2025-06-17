@@ -43,7 +43,7 @@ export const getBacklogTasksByProjectDocumentId = (
   start = 0,
   limit = 10,
 ) => {
-  return fetchData (
+  return fetchData(
     `tasks?filters[task_status][title][$eq]=Backlog&filters[project][documentId][$eq]=${documentId}&pagination[start]=${start}&pagination[limit]=${limit}&populate=*`,
   );
 };
@@ -93,10 +93,26 @@ export const deleteTask = async (taskId) => {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${API_TOKEN}`,
-    }
+    },
   });
   if (response.status === 200) {
     return await response.json();
   }
   return true;
+};
+
+// Functie met POST request om een nieuw project aan te maken
+export const createProject = async (projectData) => {
+  const response = await fetch(`${API_URL}/projects`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${API_TOKEN}`,
+    },
+    body: JSON.stringify({
+      data: projectData,
+    }),
+  });
+  const json = await response.json();
+  return json;
 };
