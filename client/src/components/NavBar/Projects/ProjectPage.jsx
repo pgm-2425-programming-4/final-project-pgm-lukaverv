@@ -32,7 +32,7 @@ function ProjectPage() {
       );
       setFilteredTasks(filtered);
     }
-  }
+  };
 
   const { data: project, isLoading: loadingProject } = useQuery({
     queryKey: ["project", projectId],
