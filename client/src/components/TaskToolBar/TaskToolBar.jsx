@@ -3,7 +3,15 @@ import { getLabels } from "../../services/api";
 import AddTaskBtn from "./Tasks/AddTaskBtn";
 import BacklogBtn from "./Backlog/BacklogBtn";
 
-function TaskToolBar({ projectTitle, projectId, onFilterTasks }) {
+function TaskToolBar({ projectTitle, projectId, onFilterTasks, onSearchTasks }) {
+const [searchInput, setSearchInput] = useState("");
+
+const handleSearchChange = (e) => {
+  const value = e.target.value;
+  setSearchInput(value);
+  onSearchTasks(value);
+}
+
   const { data: allLabels } = useQuery({
     queryKey: ["labels"],
     queryFn: getLabels,
@@ -30,6 +38,8 @@ function TaskToolBar({ projectTitle, projectId, onFilterTasks }) {
             type="text"
             className="main__search-input input"
             placeholder="Search by title"
+            value={searchInput}
+            onChange={handleSearchChange}
           />
         </div>
         <div className="main__project-info">
