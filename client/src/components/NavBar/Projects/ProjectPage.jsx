@@ -23,6 +23,17 @@ function ProjectPage() {
     }
   };
 
+  const handleSearchTasks = (searchInput) => {
+    if (!searchInput.trim()) {
+      setFilteredTasks(tasks.data);
+    } else {
+      const filtered = tasks.data.filter((task) =>
+        task.title.toLowerCase().includes(searchInput.toLowerCase()),
+      );
+      setFilteredTasks(filtered);
+    }
+  };
+
   const { data: project, isLoading: loadingProject } = useQuery({
     queryKey: ["project", projectId],
     queryFn: () => getProjectByDocumentId(projectId),
@@ -48,6 +59,7 @@ function ProjectPage() {
     <section className="project">
       <TaskToolBar
         projectTitle={project.data[0].title}
+        onSearchTasks={handleSearchTasks}
         onFilterTasks={handleFilterTasks}
         projectId={projectId}
       />
